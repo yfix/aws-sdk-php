@@ -1,13 +1,13 @@
 all: clean coverage docs
 
 test:
-	vendor/bin/phpunit
+	vendor/bin/phpunit $(TEST)
 
 coverage:
-	vendor/bin/phpunit --coverage-html=build/artifacts/coverage
+	vendor/bin/phpunit --coverage-html=build/artifacts/coverage $(TEST)
 
 integration:
-	vendor/bin/phpunit -c phpunit.functional.xml
+	vendor/bin/phpunit -c phpunit.functional.xml $(TEST)
 
 view-coverage:
 	open build/artifacts/coverage/index.html
@@ -42,7 +42,7 @@ check_tag:
 # prints out a diff of the last commit.
 tag: check_tag
 	@echo Tagging $(TAG)
-	chag update -m '$(TAG) ()'
+	chag update $(TAG)
 	sed -i '' -e "s/VERSION = '.*'/VERSION = '$(TAG)'/" src/Aws/Common/Aws.php
 	php -l src/Aws/Common/Aws.php
 	git commit -a -m '$(TAG) release'
@@ -57,12 +57,12 @@ tag: check_tag
 # "make release" to push a release. This task requires that the
 # OAUTH_TOKEN environment variable is available and the token has permission
 # to push to the repository.
-release: package
-	@echo "Pushing code to master"
+release: check_tag package
 	git push origin master
-	@echo "Pushing latest tag to Github"
-	git push origin `git describe --abbrev=0 --tags`
-	echo "Creating a Github release"
-	php build/gh-release.php
+	git push origin $(TAG)
+	php build/gh-release.php $(TAG)
+
+# Tags the repo and publishes a release.
+full_release: tag release
 
 .PHONY: docs burgomaster

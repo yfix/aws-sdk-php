@@ -45,6 +45,11 @@ return array (
             'https' => true,
             'hostname' => 's3-eu-west-1.amazonaws.com',
         ),
+        'eu-central-1' => array(
+            'http' => true,
+            'https' => true,
+            'hostname' => 's3-eu-central-1.amazonaws.com',
+        ),
         'ap-northeast-1' => array(
             'http' => true,
             'https' => true,
@@ -355,6 +360,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key-MD5',
                 ),
+                'CopySourceSSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-copy-source-server-side-encryption-aws-kms-key-id',
+                ),
                 'ACP' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
@@ -563,6 +573,11 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
                 ),
                 'ACP' => array(
                     'type' => 'object',
@@ -1068,6 +1083,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'SaveAs' => array(
                     'location' => 'response_body',
                 ),
@@ -1235,6 +1255,11 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
                 ),
             ),
             'errorResponses' => array(
@@ -1843,14 +1868,79 @@ return array (
                     'location' => 'uri',
                 ),
                 'TopicConfiguration' => array(
-                    'required' => true,
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                            ),
+                        ),
                         'Event' => array(
                             'type' => 'string',
                         ),
                         'Topic' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'QueueConfiguration' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Event' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                            ),
+                        ),
+                        'Queue' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'CloudFunctionConfiguration' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Event' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                            ),
+                        ),
+                        'CloudFunction' => array(
+                            'type' => 'string',
+                        ),
+                        'InvocationRole' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -2241,6 +2331,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'ACP' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
@@ -2493,6 +2588,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
             ),
         ),
         'UploadPartCopy' => array(
@@ -2607,6 +2707,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-copy-source-server-side-encryption-customer-key-MD5',
                 ),
+                'CopySourceSSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'command.expects' => array(
                     'static' => true,
                     'default' => 'application/xml',
@@ -2660,6 +2765,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-version-id',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -2702,6 +2812,11 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -2754,6 +2869,11 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
@@ -3202,10 +3322,82 @@ return array (
                     'type' => 'object',
                     'location' => 'xml',
                     'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'sentAs' => 'Event',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                                'sentAs' => 'Event',
+                            ),
+                        ),
                         'Event' => array(
                             'type' => 'string',
                         ),
                         'Topic' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'QueueConfiguration' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Event' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'sentAs' => 'Event',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                                'sentAs' => 'Event',
+                            ),
+                        ),
+                        'Queue' => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+                'CloudFunctionConfiguration' => array(
+                    'type' => 'object',
+                    'location' => 'xml',
+                    'properties' => array(
+                        'Id' => array(
+                            'type' => 'string',
+                        ),
+                        'Event' => array(
+                            'type' => 'string',
+                        ),
+                        'Events' => array(
+                            'type' => 'array',
+                            'sentAs' => 'Event',
+                            'data' => array(
+                                'xmlFlattened' => true,
+                            ),
+                            'items' => array(
+                                'name' => 'Event',
+                                'type' => 'string',
+                                'sentAs' => 'Event',
+                            ),
+                        ),
+                        'CloudFunction' => array(
+                            'type' => 'string',
+                        ),
+                        'InvocationRole' => array(
                             'type' => 'string',
                         ),
                     ),
@@ -3483,6 +3675,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -3681,6 +3878,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -3747,6 +3949,10 @@ return array (
                     'location' => 'xml',
                 ),
                 'Prefix' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'Delimiter' => array(
                     'type' => 'string',
                     'location' => 'xml',
                 ),
@@ -3954,6 +4160,10 @@ return array (
                     'type' => 'string',
                     'location' => 'xml',
                 ),
+                'Delimiter' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
                 'MaxKeys' => array(
                     'type' => 'numeric',
                     'location' => 'xml',
@@ -4044,6 +4254,10 @@ return array (
                     'location' => 'xml',
                 ),
                 'Prefix' => array(
+                    'type' => 'string',
+                    'location' => 'xml',
+                ),
+                'Delimiter' => array(
                     'type' => 'string',
                     'location' => 'xml',
                 ),
@@ -4303,6 +4517,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -4354,6 +4573,11 @@ return array (
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
                 ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
+                ),
                 'RequestId' => array(
                     'location' => 'header',
                     'sentAs' => 'x-amz-request-id',
@@ -4391,6 +4615,11 @@ return array (
                     'type' => 'string',
                     'location' => 'header',
                     'sentAs' => 'x-amz-server-side-encryption-customer-key-MD5',
+                ),
+                'SSEKMSKeyId' => array(
+                    'type' => 'string',
+                    'location' => 'header',
+                    'sentAs' => 'x-amz-server-side-encryption-aws-kms-key-id',
                 ),
                 'RequestId' => array(
                     'location' => 'header',
